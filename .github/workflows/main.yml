@@ -18,4 +18,4 @@ jobs:
         aws-region: us-west-2
         
     - name: trigger amplify pipeline
-      run:  aws amplify start-deployment --app-id d3mmis9ncnfxuk --branch-name main --job-id `date -u +"%Y%m%d%H%M%S"`
+      run:  aws amplify start-job --app-id d3mmis9ncnfxuk --branch-name main --job-id `date -u +"%Y%m%d%H%M%S"`

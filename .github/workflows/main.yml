@@ -1,0 +1,21 @@
+name: Deploy React App (prod)
+on:
+  release:
+    types: [published]
+jobs:
+  deploy:
+    name: Deploy WebApp
+    environment: Production
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::651644924182:role/flopes-oidc-github
+        aws-region: us-west-2
+        
+    - name: trigger amplify pipeline
+      run:  aws amplify start-deployment --app-id amplify-tutorial --branch-name main --job-id `date -u +"%Y%m%d%H%M%S"`
